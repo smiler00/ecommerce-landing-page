@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+
+  <title>E-commerce</title>
+  <!-- Configuration Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            kumbh: ['"Kumbh Sans"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+</head>
+
+<body class="md:my-12 md:p-4 font-kumbh">
+  <header
+    class="border-b shadow-sm p-6 flex flex-col justify-center gap-6 md:mb-12 sticky top-0 right-0 bg-white/80 backdrop-blur z-50">
+    <div class="flex items-center justify-between gap-12">
+      <div class="flex gap-4 flex items-center justify-center">
+        <ul>
+          <li><i id="menuToggle" class="fas fa-bars cursor-pointer flex md:hidden"></i></li>
+        </ul>
+        <ul>
+          <li class="font-bold font-kumbh"><a href="#">sneakers</a></li>
+        </ul>
+        <ul class="flex items-center justify-center gap-4 text-gray-400 hidden md:flex">
+          <li>
+            <a href="#"
+              class="hover:text-gray-500 duration-300 hover:border-b-4 border-orange-500 hover:pb-6">Collections</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-500  duration-300 hover:border-b-4 border-orange-500 hover:pb-6">Men</a>
+          </li>
+          <li>
+            <a href="#"
+              class="hover:text-gray-500  duration-300 hover:border-b-4 border-orange-500 hover:pb-6">Women</a>
+          </li>
+          <li>
+            <a href="#"
+              class="hover:text-gray-500  duration-300 hover:border-b-4 border-orange-500 hover:pb-6">About</a>
+          </li>
+          <li>
+            <a href="#"
+              class="hover:text-gray-500  duration-300 hover:border-b-4 border-orange-500 hover:pb-6">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="flex items-center justify-center gap-2 relative w-full">
+        <div class="relative">
+          <i class="fas fa-cart-shopping text-gray-600 cursor-pointer" id="shoppingCart"></i>
+          <span
+            class="absolute top-[-9px] left-[8px] w-4 h-4 bg-orange-500 rounded-full text-white flex items-center justify-center text-xs"
+            id="count">0</span>
+        </div>
+        <img src="image-avatar.png" alt="logo" class="w-6 h-6 rounded-full focus:border focus:border-orange-500" />
+        <div
+          class="hidden w-80 flex flex-col gap-4 shadow-lg p-4 rounded-lg absolute top-[40px] right-4 z-[9999] bg-white"
+          id="cart">
+          <div class="flex flex-col gap-4">
+            <p class="font-bold capitalize">Cart</p>
+            <hr />
+          </div>
+          <div id="emptyState" class="text-gray-400 p-4 flex flex-col justify-center items-center gap-4"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden" id="mobileMenu">
+      <ul class="flex flex-col justify-center gap-4 text-gray-400">
+        <li>
+          <a href="#" class="hover:text-gray-500 transition duration-300 ">Collections</a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-gray-500 transition duration-300">Men</a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-gray-500 transition duration-300">Women</a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-gray-500 transition duration-300">About</a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-gray-500 transition duration-300">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="flex md:gap-12 justify-center items-center flex-col md:flex-row">
+    <div class="flex flex-col gap-4 items-center justify-center">
+      <div class="flex justify-center items-center relative">
+        <i class="fas fa-chevron-left bg-white text-black rounded-full p-3 flex md:hidden absolute top-50 left-5"
+          onclick="decremente()"></i>
+        <img src="images/image-product-1.jpg" alt="produit 1" class="md:rounded-lg cursor-pointer w-full max-w-md"
+          id="image" />
+        <i class="fas fa-chevron-right bg-white text-black rounded-full p-3 flex md:hidden top-50 right-5 absolute"
+          onclick="incremente()"></i>
+      </div>
+      <div class="flex items-center gap-4 hidden md:flex">
+        <div class="relative w-20 h-20 overflow-hidden rounded-md border-2 border-orange-500">
+          <img src="images/image-product-1-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60"></div>
+        </div>
+
+        <div class="group relative w-20 h-20 overflow-hidden rounded-md cursor-pointer">
+          <img src="images/image-product-2-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+        </div>
+        <div class="group relative w-20 h-20 overflow-hidden rounded-md cursor-pointer">
+          <img src="images/image-product-3-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+        </div>
+        <div class="group relative w-20 h-20 overflow-hidden rounded-md cursor-pointer">
+          <img src="images/image-product-4-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 p-4">
+      <p class="text-gray-400 text-xs font-bold">SNEAKER COMPANY</p>
+      <p class="font-bold capitalize text-3xl" id="title">
+        fall limited edition<br />
+        sneakers
+      </p>
+      <p class="text-gray-400">
+        These low-profile sneakers are your perfect casual wear companion.
+        Featuring a durable rubber outer sole, they'll withstand everything
+        the weather can offer.
+      </p>
+      <div class="flex md:flex-col mb-4 justify-between items-center">
+        <div class="flex gap-4 items-center">
+          <p class="font-bold text-2xl"><i class="fas fa-dollar"></i><span id="price">125.00</span></p>
+          <p class="bg-black text-white font-bold rounded-lg px-3 py-1">50%</p>
+        </div>
+        <p class="text-gray-400 text-xs font-bold">
+          <i class="fas fa-dollar line-through text-lg"></i><span id="discount"
+            class="text-lg line-through">250.00</span>
+        </p>
+      </div>
+      <div class="flex gap-4 flex-col md:flex-row">
+        <div class="flex justify-between bg-gray-100 rounded-lg gap-6 p-2 items-center">
+          <button id="minus" class="ml-6">
+            <i class="fas fa-minus text-orange-500"></i>
+          </button>
+          <p id="compteur" class="font-bold">0</p>
+          <button id="plus" class="mr-6">
+            <i class="fas fa-plus text-orange-500"></i>
+          </button>
+        </div>
+        <button class="bg-orange-500 hover:bg-orange-300 rounded-lg shadow-lg p-2 font-bold text-black" id="addToCart">
+          <i class="fas fa-cart-shopping"></i> Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const minus = document.getElementById("minus");
+    const plus = document.getElementById("plus");
+    const discount = document.getElementById("discount");
+    const submitBtn = document.getElementById("addToCart");
+    let imagePop = document.getElementById("image");
+    const cpt = document.getElementById("compteur");
+    const price = document.getElementById("price");
+    const count = document.getElementById("count");
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    let emptyState = document.getElementById('emptyState');
+    const titre = document.getElementById('title');
+    const shoppingCart = document.getElementById('shoppingCart');
+    const cart = document.getElementById('cart');
+    const trash = document.getElementById('trash');
+
+    function deleted() {
+      emptyState.classList.toggle('hidden');
+    }
+
+    shoppingCart.addEventListener('click', () => {
+      cart.classList.toggle('hidden');
+    });
+
+    let i = 1; // compteur
+    const unitPrice = 125; // prix de base d’un article
+
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      menuToggle.classList.toggle("fa-times");
+    });
+
+    plus.addEventListener("click", () => {
+      if (i < 10000000) {
+        i++;
+        updateDisplay();
+      }
+    });
+
+    minus.addEventListener("click", () => {
+      if (i > 1) {
+        i--;
+        updateDisplay();
+      } else {
+        showNotification(`Le compteur est déjà à ${i}`, "info");
+      }
+    });
+
+    const total = unitPrice * i;
+    function updateDisplay() {
+      cpt.textContent = i;
+      const total = unitPrice * i;
+      price.textContent = `${total.toFixed(2)}`;
+      discount.textContent = `${(unitPrice * 2).toFixed(2)}`; // prix barré
+    }
+
+    function showNotification(msg, type) {
+      const div = document.createElement("div");
+      div.textContent = msg;
+      div.className =
+        "p-2 rounded-lg text-white fixed bottom-4 right-4 shadow-lg transition-opacity duration-500";
+
+      // Ajouter la couleure selon le type de notification
+      if (type === "error") {
+        div.classList.add("bg-red-500"); // erreur : rouge
+      } else if (type === "success") {
+        div.classList.add("bg-green-500"); // succèss : vert
+      } else if (type === "info") {
+        div.classList.add("bg-blue-500"); // info : bleu
+      } else {
+        div.classList.add("bg-gray-800"); // si aucun cas : gris
+      }
+
+      document.body.appendChild(div);
+
+      // cacher après 3 secondes
+      setTimeout(() => {
+        div.style.opacity = "0";
+        setTimeout(() => div.remove(), 500);
+      }, 3000);
+
+      return div;
+    }
+
+    submitBtn.addEventListener("click", () => {
+      count.textContent = i;
+      showNotification(
+        `produit soumis avec succès, ${count.textContent}`,
+        "success"
+      );
+    });
+
+    const popupImgDiv = document.createElement('div');
+    popupImgDiv.className = 'flex relative justify-center items-center p-6 gap-4';
+    const overlay = document.createElement("div");
+    overlay.className =
+      "bg-black/60 fixed inset-0 flex flex-col items-center justify-center z-50 hidden";
+
+    let popupImg = document.createElement("img");
+    popupImg.className = "rounded-lg shadow-xl max-w-md";
+
+    const closePopup = document.createElement("i");
+    closePopup.className =
+      "fas fa-times absolute top-[-20px] right-8 text-white hover:text-orange-500 transition duration-150 rounded-lg text-xl cursor-pointer";
+    const prevBtn = document.createElement("i");
+    prevBtn.className =
+      "fas fa-chevron-left bg-gray-100 px-4 py-4 rounded-full cursor-pointer hover:bg-gray-300 hover:text-orange-500 transition duration-150 absolute top-50 left-7 z-[9999]";
+    const nextBtn = document.createElement("i");
+    nextBtn.className =
+      "fas fa-chevron-right bg-gray-100 px-4 py-4 rounded-full cursor-pointer hover:bg-gray-300 hover:text-orange-500 transition duration-150 absolute top-50 right-7 z-[9999]";
+    overlay.appendChild(popupImgDiv);
+    popupImgDiv.appendChild(prevBtn);
+    popupImgDiv.appendChild(popupImg);
+    popupImgDiv.appendChild(nextBtn);
+    popupImgDiv.appendChild(closePopup);
+    document.body.appendChild(overlay);
+
+    imagePop.addEventListener("click", () => {
+      popupImg.src = imagePop.src;
+      overlay.classList.remove("hidden");
+    });
+
+    function closeOverlay() {
+      overlay.classList.add("hidden");
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeOverlay();
+      }
+    });
+
+    closePopup.addEventListener("click", () => closeOverlay);
+
+    let index = 1;
+
+    function incremente() {
+      if (index < 4) {
+        index++;
+        popupImg.src = `images/image-product-${index}.jpg`;
+        imagePop.src = `images/image-product-${index}.jpg`;
+        nextBtn.style.cursor = 'pointer';
+        prevBtn.style.cursor = 'pointer';
+      }
+      if (index === 4) {
+        nextBtn.style.cursor = 'not-allowed';
+      }
+    }
+
+    function decremente() {
+      if (index > 1) {
+        index--;
+        popupImg.src = `images/image-product-${index}.jpg`;
+        imagePop.src = `images/image-product-${index}.jpg`;
+        prevBtn.style.cursor = 'pointer';
+        nextBtn.style.cursor = 'pointer';
+      }
+      if (index === 1) {
+        prevBtn.style.cursor = 'not-allowed';
+      }
+    }
+
+    nextBtn.addEventListener('click', incremente);
+
+    prevBtn.addEventListener('click', decremente)
+
+    const thumDiv = document.createElement('div');
+    thumDiv.className = 'flex gap-4 justify-center items-center';
+    thumDiv.innerHTML = `<div class="relative w-20 h-20 overflow-hidden rounded-md border-2 border-orange-500">
+          <img src="images/image-product-1-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60"></div>
+        </div>
+<div class="group relative w-20 h-20 overflow-hidden rounded-md cursor-pointer">
+          <img src="images/image-product-2-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+        </div>
+<div class="group relative w-20 h-20 overflow-hidden rounded-md cursor-pointer">
+          <img src="images/image-product-3-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+        </div>    
+<div class="group relative w-20 h-20 overflow-hidden rounded-md cursor-pointer">
+          <img src="images/image-product-4-thumbnail.jpg" alt="Sneakers" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+        </div>`;
+    const images = thumDiv.querySelectorAll('img');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        // Retirer la bordure de toutes les miniatures
+        images.forEach(i => i.classList.remove('border-2', 'border-orange-500'));
+
+        // Ajouter la bordure à l’image cliquée
+        img.classList.add('border-2', 'border-orange-500');
+        // imagePop.src = img.src;
+        // popupImg.src = img.src;
+      });
+    });
+
+    overlay.appendChild(thumDiv);
+
+    emptyState.textContent = "Your cart is empty";
+    submitBtn.addEventListener('click', () => {
+      emptyState.innerHTML = `<div class='flex gap-2 justify-center items-center' ><img src='${imagePop.src}' class="rounded-md w-10 h-10" /> <div class="flex flex-col"><p class="captitalize">${titre.textContent}</> <p>${unitPrice} x ${cpt.textContent} <span class="font-bold text-black">$${total * i}</span></p></div> <i class="fas fa-trash-alt hover:text-red-500" onclick="deleted()"></i></div > <button class="bg-orange-500 hover:bg-orange-500 rounded-lg p-2 text-black w-full font-bold">Checkout</button>`
+    });
+  </script>
+</body>
+
+</html>
