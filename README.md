@@ -18,7 +18,7 @@ Users should be able to:
 
 ### 📸 Screenshot
 
-![Desktop preview](./images/image-desktop.png)
+![Desktop preview](image-desktop.png)
 
 ### 🔗 Links
 
